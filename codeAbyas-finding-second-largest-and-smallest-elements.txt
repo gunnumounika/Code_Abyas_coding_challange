@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+class Finding_second_largest{
+    private int[] arr;
+    
+    public void creat_array(int n){
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        for(int i=0;i<arr.length;i++){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public void second_maximum(){
+        int max = -1000000;
+        int sec_max = -100000;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>max){
+                sec_max = max;
+                max = arr[i];
+            }
+            else if(arr[i]<max && arr[i]>sec_max){
+                sec_max = arr[i];
+            }
+        }
+        System.out.println("The first maximum element is : "+max);
+        System.out.println("The second maximum element is : "+sec_max);
+    }
+    
+    public void second_minimum(){
+        int min = 1000000;
+        int sec_min =10000000;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]<min){
+                sec_min = min;
+                min = arr[i];
+            }
+            else if(arr[i]>min && arr[i]<sec_min){
+                sec_min = arr[i];
+            }
+        }
+        System.out.println("The first minimum element is : "+min);
+        System.out.println("The second minimum element is : "+sec_min);
+    }
+    
+    public void print(){
+        for(int i=0;i<arr.length;i++){
+            System.out.print("element "+(i+1)+" is : ");
+            System.out.println(arr[i]);
+        }
+    }
+    
+    
+    public static void main(String args[]){
+        Finding_second_largest find = new Finding_second_largest();
+        int n;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter no. of elements of array : ");
+        n = sc.nextInt();
+        find.creat_array(n);
+        find.print();
+        find.second_maximum();
+        find.second_minimum();
+        
+        
+    }
+}
+
+OUTPUT : 
+
+java -cp /tmp/JMzb9IU5H0 Finding_second_largest
+Enter no. of elements of array : 5
+Enter the element 1 : 1
+Enter the element 2 : 5
+Enter the element 3 : 2
+Enter the element 4 : 3
+Enter the element 5 : 6
+element 1 is : 1
+element 2 is : 5
+element 3 is : 2
+element 4 is : 3
+element 5 is : 6
+The first maximum element is : 6
+The second maximum element is : 5
+The first minimum element is : 1
+The second minimum element is : 2

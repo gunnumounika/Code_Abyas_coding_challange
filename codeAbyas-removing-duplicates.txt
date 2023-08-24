@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+class Removing_Duplicates{
+     private int[] arr;  
+     private int n ;
+    
+    public void creat_array(int n){
+        this.n = n;
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        for(int i=0;i<arr.length;i++){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public void removing_duplicates(){
+        int i = 0;
+        int j = 0;
+        while(j<n){
+            if(arr[i] == arr[j]){
+               j++; 
+            }
+            else{
+                i = i+1;
+                arr[i] = arr[j];
+                j++;
+            }
+            
+        }
+        for(int ind=(i+1);ind<n;ind++){
+            arr[ind] = -1;
+        }
+    }
+    
+    public void print(){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i] >0){
+            System.out.print("element "+(i+1)+" is : ");
+            System.out.println(arr[i]);
+            }
+        }
+    }
+    
+    public static void main(String args[]){
+        Removing_Duplicates find = new Removing_Duplicates();
+        int n;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter no. of elements of array : ");
+        n = sc.nextInt();
+        find.creat_array(n);
+        find.print();
+        find.removing_duplicates();
+        System.out.println("haii hello");
+        find.print();
+    }
+} 
+
+OUTPUT : 
+java -cp /tmp/20Kpe8fyR0 Removing_Duplicates
+Enter no. of elements of array : 6
+Enter the element 1 : 1
+Enter the element 2 : 1
+Enter the element 3 : 2
+Enter the element 4 : 2
+Enter the element 5 : 4
+Enter the element 6 : 6
+element 1 is : 1
+element 2 is : 1
+element 3 is : 2
+element 4 is : 2
+element 5 is : 4
+element 6 is : 6
+haii hello
+element 1 is : 1
+element 2 is : 2element 3 is : 4
+element 4 is : 6

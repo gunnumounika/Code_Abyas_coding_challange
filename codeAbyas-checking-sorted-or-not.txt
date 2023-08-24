@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+class check_for_sortedArray{
+     private int[] arr;  
+     private int n ;
+    
+    public void creat_array(int n){
+        this.n = n;
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        for(int i=0;i<arr.length;i++){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public void isSorted(){
+        
+        if(arr[0]<arr[1]){
+            int i=1;
+            while(i<(n-1)){
+                if(arr[i]<arr[i+1]){
+                    i++;
+                }
+                else{
+                    System.out.println("Not Sorted!!!");
+                    return;
+                }
+            }
+        }
+        if(arr[0]>arr[1]){
+            int i=1;
+            while(i<(n-1)){
+                if(arr[i]>arr[i+1]){
+                    i++;
+                }
+                else{
+                    System.out.println("Not sorted!!!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Sorted!!!!");
+    }
+    
+    public void print(){
+        for(int i=0;i<arr.length;i++){   
+            if(arr[i] >0){
+            System.out.print("element "+(i+1)+" is : ");
+            System.out.println(arr[i]);
+            }
+        }
+    }
+    public static void main(String args[]){
+        check_for_sortedArray sort = new check_for_sortedArray();
+        int n;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter no. of elements of array : ");
+        n = sc.nextInt();
+        sort.creat_array(n);
+        sort.print();
+        sort.isSorted();
+        
+    }
+} 
+
+OUTPUT : 
+
+Enter no. of elements of array : 4
+Enter the element 1 : 10
+Enter the element 2 : 3
+Enter the element 3 : 30
+Enter the element 4 : 5
+element 1 is : 10
+element 2 is : 3
+element 3 is : 30
+element 4 is : 5
+Not sorted!!!
