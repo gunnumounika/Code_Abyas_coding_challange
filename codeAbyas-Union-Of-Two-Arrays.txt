@@ -1,0 +1,30 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class UnionOfTwoArrays{
+    
+    public static void main(String args[]){
+        Set<Integer> s = new HashSet<Integer>();
+        int[] arr1={1,4,2,4,3,2,3};
+        int[] arr2 = {6,3,7,2,4,2};
+        for(int i : arr1){
+            s.add(i);
+        }
+        for(int j : arr2){
+            s.add(j);
+        }
+        for(var v : s){
+            System.out.println(v);
+        }
+        
+    }
+}
+
+OUTPUT : 
+
+java -cp /tmp/2lYG5TP2md UnionOfTwoArrays
+1
+2
+34
+6
+7

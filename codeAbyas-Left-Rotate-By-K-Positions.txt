@@ -1,0 +1,76 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class RotateByKPositions{
+    private ArrayList<Integer> arr = new ArrayList<Integer>();
+    public void create(int n){
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<n;i++){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            int k = sc.nextInt();
+            arr.add(k);
+        }
+    }
+    
+    public ArrayList<Integer> reverse(int start,int end){
+        int temp=0;
+        while(start<end){
+            temp = arr.get(start);
+            arr.set(start,arr.get(end));
+            arr.set(end,temp);
+            start++;
+            end--;
+        }
+        return arr;
+    }
+    
+    public void rotateByKPositions(int k,int n){
+        reverse(0,(k-1));
+        reverse(k,n-1);
+        reverse(0,n-1);
+        print();
+    }
+    
+    public void print(){
+        for(int i : arr){
+            System.out.println(i);
+        }
+    }
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the no. of elements of array : ");
+        int n = sc.nextInt();
+        RotateByKPositions rt = new RotateByKPositions();
+        rt.create(n);
+        System.out.println("Before rotation : ");
+        rt.print();
+        System.out.print("Enter the no. of position to left rotate : ");
+        int k = sc.nextInt();
+        System.out.println("After rotate by "+k+" positions ");
+        rt.rotateByKPositions(k,n);
+    }
+}
+
+
+OUTPUT : 
+
+java -cp /tmp/nPW6nPw8BK RotateByKPositions
+Enter the no. of elements of array : 5
+Enter the element 1 : 5
+Enter the element 2 : 9
+Enter the element 3 : 3
+Enter the element 4 : 9
+Enter the element 5 : 10
+Before rotation : 
+5
+9
+3
+9
+10
+Enter the no. of position to left rotate : 2
+After rotate by 2 positions 
+3
+9
+10
+5
+9
