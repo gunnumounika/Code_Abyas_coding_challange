@@ -1,0 +1,115 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+class FindingUniqueElement{
+    private int[] arr;
+    
+    public void create(int n){
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        int i=0;
+        while(i<n){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            int k = sc.nextInt();
+            arr[i++]=k;
+        }
+    }
+    
+    public void findUniqueElementUsingHashMap(){
+        Map<Integer,Integer> mp = new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            if(!mp.containsKey(arr[i])){
+                System.out.println(arr[i]);
+                mp.put(arr[i],1);
+            }
+            else{
+                mp.put(arr[i],2);
+            }
+        }
+        System.out.println(mp); 
+        for(Map.Entry<Integer,Integer> o : mp.entrySet()){
+        if(o.getValue() == 1){
+            System.out.println("The unique element using hashmap is : "+o.getKey());
+        }
+        }
+    }
+    
+    public void findUniqueElementUsingXOR(){
+        int xor=0;
+        for(int i: arr){
+            xor = xor^i;
+        }
+        System.out.println("The unique element using XOR is : "+xor);
+    }
+    
+    public void findUniqueElementUsingSorting(){
+        sort();
+        int i=0;
+        while(i<arr.length-1){
+            if(arr[i]==arr[i+1]){
+                i += 2;
+            }
+            else{
+                break;
+            }
+        }
+        System.out.println("The unique element using sorting is : "+arr[i]);
+    }
+    
+
+    
+    private void sort(){
+        int temp=0;
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=0;j<arr.length-i-1;j++){
+                if(arr[j]>arr[j+1]){
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        
+    }
+    
+     public void print(){
+        int i=0;
+        while(i<arr.length){
+            System.out.println(arr[i]);
+            i++;
+        }
+    }
+    
+    public static void main(String args[]){
+        FindingUniqueElement find = new FindingUniqueElement();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the no. of elements : ");
+        int n = sc.nextInt();
+        find.create(n);
+        // int[] arr = {1,2,3,3,1,2,4};
+        find.findUniqueElementUsingHashMap();
+        find.findUniqueElementUsingXOR();
+        find.findUniqueElementUsingSorting();
+}
+}
+
+OUTPUT : 
+
+java -cp /tmp/PNkFKLGdhw FindingUniqueElement
+Enter the no. of elements : 
+7
+Enter the element 1 : 1
+Enter the element 2 : 2
+Enter the element 3 : 3
+Enter the element 4 : 3
+Enter the element 5 : 1
+Enter the element 6 : 2
+Enter the element 7 : 4
+12
+3
+4
+{1=2, 2=2, 3=2, 4=1}
+The unique element using hashmap is : 4
+The unique element using XOR is : 4
+The unique element using sorting is : 4
