@@ -1,0 +1,104 @@
+import java.util.Scanner;
+
+class FindingMissingNumber{
+    private int[] arr;
+    public void create(int n){
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        int i=0;
+        while(i<n){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            int k = sc.nextInt();
+            arr[i++]=k;
+        }
+    }
+    
+    public void finding_Missing_Number_Using_XOR(){
+        int xor1=0;
+        int xor2=0;
+        for(int i=1;i<=(arr.length+1);i++){
+            xor1 = xor1^i;
+        }
+        for(int j=0;j<arr.length;j++){
+            xor2 =xor2^arr[j];
+        }
+        System.out.println("The Missing number using XOR method is : "+(xor1^xor2));
+    }
+    
+    public void finding_Missing_Number_Using_Formula(){
+        int n =arr.length+1;
+        int sum_n = (n*(n+1))/2;
+        int sum_arr = 0;
+        for(int i=0;i<arr.length;i++){
+            sum_arr += arr[i];
+        }
+        System.out.println("Missing number using formula is : "+(sum_n-sum_arr));
+        
+    }
+    
+    public void finding_Missing_Number_Using_Sorting(){
+        int i=0;
+        int j=1;
+        sort();
+        while(j<=arr.length+1 && i<arr.length){
+            if(arr[i] == j){
+                i++;
+                j++;
+            }
+            else{
+                System.out.println("Missing number using sorting is : "+(arr[i]-1));
+                return;
+            }
+        }
+    }
+    private void sort(){
+        int temp = 0;
+        
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=0;j<arr.length-i-1;j++){
+                if(arr[j] > arr[j+1]){
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        
+    }
+    
+    public void print(){
+        int i=0;
+        while(i<arr.length){
+            System.out.println(arr[i]);
+            i++;
+        } 
+    }
+    public static void main(String args[]){
+        FindingMissingNumber miss =new FindingMissingNumber();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the no. of elements : ");
+        int n = sc.nextInt();
+        miss.create(n);
+        miss.print();
+        miss.finding_Missing_Number_Using_XOR();
+        miss.finding_Missing_Number_Using_Formula();
+        miss.finding_Missing_Number_Using_Sorting();
+        
+    }
+}
+
+OUTPUT : 
+
+Enter the no. of elements : 5
+Enter the element 1 : 1
+Enter the element 2 : 3
+Enter the element 3 : 5
+Enter the element 4 : 2
+6Enter the element 5 : 6
+13
+5
+2
+6
+The Missing number using XOR method is : 4
+Missing number using formula is : 4
+Missing number using sorting is : 4

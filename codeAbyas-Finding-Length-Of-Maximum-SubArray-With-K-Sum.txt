@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+class LinearSearch{
+    private int[] arr;
+    public void create(int n){
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        int i=0;
+        while(i<n){
+            System.out.print("Enter the element "+(i+1)+" : ");
+            int k = sc.nextInt();
+            arr[i++]=k;
+        }
+    }
+    
+    public void findMaxSubStringOfSumK(int s){
+        int max1=0;
+        int sum=0;
+        for(int i=0;i<arr.length;i++){
+            sum = 0;
+            for(int j=i;j<arr.length;j++){
+                sum+=arr[j];
+                if (sum == s){
+                    max1 = Math.max(max1,j);
+                }
+            }
+        }
+        System.out.println("The maximum length is : "+max1);
+    }
+    public void print(){
+        int i=0;
+        while(i<arr.length){
+            System.out.println(arr[i]);
+            i++;
+        }
+    }
+    
+    public static void main(String args[]){
+        LinearSearch ls =new LinearSearch();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the no. of elements : ");
+        int n = sc.nextInt();
+        ls.create(n);
+        ls.print();
+        ls.findMaxSubStringOfSumK(6);
+    }
+}
+
+
+OUTPUT : 
+
+
+Enter the no. of elements : 
+4
+Enter the element 1 : 1
+Enter the element 2 : 2
+Enter the element 3 : 3
+Enter the element 4 : 6
+1
+2
+3
+6
+The maximum length is : 3
