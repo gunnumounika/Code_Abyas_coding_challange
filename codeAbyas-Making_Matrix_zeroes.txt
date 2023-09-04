@@ -1,0 +1,79 @@
+import java.util.Scanner;
+
+class RotateArrayBy90Degrees {
+    private int[][] arr;
+
+    public void createMatrix(int n, int m) {
+        arr = new int[n][m];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print("Enter the value of arr[" + i + "][" + j + "] : ");
+                arr[i][j] = sc.nextInt();
+            }
+        }
+    }
+
+    public void findZeroes() {
+        int[] rows = new int[arr.length];
+        int[] cols = new int[arr[0].length];
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
+                if (arr[i][j] == 0) {
+                    rows[i] = 1;
+                    cols[j] = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (rows[i] == 1 || cols[j] == 1) {
+                    arr[i][j] = 0;
+                }
+            }
+        }
+        printMatrix();
+    }
+
+    public void printMatrix() {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
+                System.out.print(arr[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the no. of rows : ");
+        int n = sc.nextInt();
+        System.out.println("");
+        System.out.print("Enter the no. of columns : ");
+        int m = sc.nextInt();
+        RotateArrayBy90Degrees obj = new RotateArrayBy90Degrees();
+        obj.createMatrix(n, m);
+        obj.findZeroes();
+    }
+}
+
+
+OUTPUT : 
+
+
+Enter the no. of rows : 3
+Enter the no. of columns : 3
+Enter the value of arr[0][0] : 1
+Enter the value of arr[0][1] : 1
+Enter the value of arr[0][2] : 3
+Enter the value of arr[1][0] : 4
+Enter the value of arr[1][1] : 0
+Enter the value of arr[1][2] : 6
+Enter the value of arr[2][0] : 0
+Enter the value of arr[2][1] : 7
+Enter the value of arr[2][2] : 8
+0  0  3 
+0  0  0  
+0  0  0  

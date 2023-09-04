@@ -1,0 +1,154 @@
+/** Method-1 Using hash maps**/
+/** two sum means the sum of two elements equal to the given sum**/
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+class TwoSum{
+    private int[] arr;
+    
+    public void createArray(int n){
+        arr = new int[n];
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<n;i++){
+            System.out.println("Enter the element "+(i+1)+" : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public int[] twoSum(int target){
+       
+        Map<Integer,Integer> mp = new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            mp.put(arr[i],i);
+        }
+        
+        for(int i=0;i<arr.length;i++){
+            int sec_num = target - arr[i];
+            if(mp.containsKey(sec_num) && mp.get(sec_num)!=i){
+                return new int[]{i,mp.get(sec_num)};
+            }
+        }
+        return new int[] {};
+    }
+    
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the value of n : ");
+        int n = sc.nextInt();
+        TwoSum obj = new TwoSum();
+         System.out.println("Enter the sum you want : ");
+        int sum = sc.nextInt();
+        obj.createArray(n);
+       
+        int[] arr = obj.twoSum(sum);
+        for (int i : arr){
+            System.out.println(i);
+        }
+    }
+}
+
+OUTPUT :
+
+java -cp /tmp/dGODT4FQEF TwoSum
+Enter the value of n : 
+4
+Enter the sum you want : 
+8
+Enter the element 1 : 
+1
+Enter the element 2 : 
+5
+Enter the element 3 : 
+6
+Enter the element 4 : 
+7
+0
+3
+
+
+
+/** Method-2 Using sorting and 2 pointers **/
+import java.util.Scanner;
+
+class Main{
+    private int[] arr;
+    
+    public void createArray(int n){
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        for(int i=0;i<n;i++){
+            System.out.println("Enter the element "+(i+1)+" : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public int[] sortArray(){
+        int temp=0;
+        int[] sortedArray = arr;
+        for(int i=0 ; i<sortedArray.length-1;i++){
+            for(int j =(i+1);j<sortedArray.length;j++){
+                if (sortedArray[i]>sortedArray[j]){
+                    temp = sortedArray[i];
+                   sortedArray[i] = sortedArray[j];
+                   sortedArray[j] = temp;
+                }
+            }
+        }
+        
+        return sortedArray;
+    }
+    
+    public void twoSum(int sum){
+        int i = 0;
+        int j = arr.length-1;
+        int cur_sum = 0;
+        int[] sarr = sortArray() ;
+        
+        while(i<j){
+            cur_sum = sarr[i]+sarr[j];
+            if (sum == cur_sum){
+                System.out.println("First element is "+sarr[i]+" second element is "+sarr[j]);
+                i++;
+                j--;
+            }
+            else if(sum > cur_sum){
+                j--;
+            }
+            else{
+                i++;
+            }
+            
+        }
+    }
+    
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the value of n ");
+        int n =sc.nextInt();
+        Main obj = new Main();
+        obj.createArray(n);
+        
+        System.out.println("Enter the value of sum : ");
+        int sum = sc.nextInt();
+        obj.twoSum(sum);
+    }
+}
+
+
+OUTPUT : 
+
+java -cp /tmp/a9emHPAsBV Main
+Enter the value of n 5
+Enter the element 1 : 
+5
+Enter the element 2 : 2
+Enter the element 3 : 6
+Enter the element 4 : 
+1
+Enter the element 5 : 
+7
+Enter the value of sum : 
+8
+First element is 1 second element is 7
+First element is 2 second element is 6

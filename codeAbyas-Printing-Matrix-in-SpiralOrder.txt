@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+class SpiralOrderOfMatrix {
+    private int[][] arr;
+
+    public void createMatrix(int n, int m) {
+        arr = new int[n][m];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print("Enter the value of arr[" + i + "][" + j + "] : ");
+                arr[i][j] = sc.nextInt();
+            }
+        }
+    }
+
+    public void spiralOrderOfMatrix() {
+        int left = 0;
+        int top = 0;
+        int right = arr[0].length - 1;
+        int bottom = arr.length - 1;
+        System.out.print("The spiral order of matrix is : ");
+
+        while (left <= right && top <= bottom) {
+            // Traverse from left to right along the top row
+            for (int i = left; i <= right; i++) {
+                System.out.print(arr[top][i] + " ");
+            }
+            top++;
+
+            // Traverse from top to bottom along the rightmost column
+            for (int i = top; i <= bottom; i++) {
+                System.out.print(arr[i][right] + " ");
+            }
+            right--;
+
+            // Check if there are more rows to traverse
+            if (top <= bottom) {
+                // Traverse from right to left along the bottom row
+                for (int i = right; i >= left; i--) {
+                    System.out.print(arr[bottom][i] + " ");
+                }
+                bottom--;
+            }
+
+            // Check if there are more columns to traverse
+            if (left <= right) {
+                // Traverse from bottom to top along the leftmost column
+                for (int i = bottom; i >= top; i--) {
+                    System.out.print(arr[i][left] + " ");
+                }
+                left++;
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the no. of rows : ");
+        int n = sc.nextInt();
+        System.out.println("");
+        System.out.print("Enter the no. of columns : ");
+        int m = sc.nextInt();
+        SpiralOrderOfMatrix obj = new SpiralOrderOfMatrix();
+        obj.createMatrix(n, m);
+        obj.spiralOrderOfMatrix();
+    }
+}
+
+
+OUTPUT : 
+
+Enter the no. of rows : 4
+Enter the no. of columns : 4
+Enter the value of arr[0][0] : 1
+Enter the value of arr[0][1] : 2
+Enter the value of arr[0][2] : 3
+Enter the value of arr[0][3] : 4
+Enter the value of arr[1][0] : 5
+Enter the value of arr[1][1] : 6
+Enter the value of arr[1][2] : 7
+Enter the value of arr[1][3] : 8
+Enter the value of arr[2][0] : 9
+Enter the value of arr[2][1] : 10
+Enter the value of arr[2][2] : 11
+Enter the value of arr[2][3] : 12
+Enter the value of arr[3][0] : 13
+Enter the value of arr[3][1] : 14
+1Enter the value of arr[3][2] : 15
+Enter the value of arr[3][3] : 16
+The spiral order of matrix is : 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10 

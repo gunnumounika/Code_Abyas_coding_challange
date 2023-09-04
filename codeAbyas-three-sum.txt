@@ -1,0 +1,203 @@
+/* Method-1 Using pointers*/
+import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.Arrays;
+
+
+class Main {
+    private int[] arr;
+
+    public void createArray(int n) {
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the element " + (i + 1) + " : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+
+    public void threeSum(int sum) {
+        sortArray();
+        Set<List<Integer>> result_set = new HashSet<>();
+        for (int k = 0; k < arr.length - 2; k++) {
+            int i = k + 1;
+            int j = arr.length - 1;
+            int rem_sum = sum - arr[k];
+            while (i < j) {
+                int cur_sum = arr[i] + arr[j];
+                if (rem_sum == cur_sum) {
+                    List<Integer> triplet = Arrays.asList(arr[k],arr[i],arr[j]);
+                   result_set.add(triplet);
+                    i++;
+                    j--;
+                } else if (rem_sum > cur_sum) {
+                    i++;
+                } else {
+                    j--;
+                }
+            }
+        }
+        
+        for(List<Integer> trip : result_set){
+            System.out.println("Triplet is : "+trip.get(0)+" "+trip.get(1)+" "+trip.get(2));
+        }
+    }
+
+    private void sortArray() {
+        int temp = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the value of n ");
+        int n = sc.nextInt();
+        Main obj = new Main();
+        obj.createArray(n);
+
+        System.out.println("Enter the value of sum : ");
+        int sum = sc.nextInt();
+        obj.threeSum(sum);
+    }
+}
+
+
+
+OUTPUT : 
+
+Enter the value of n 7
+Enter the element 1 : 
+1
+Enter the element 2 : 
+1
+Enter the element 3 : 
+5
+Enter the element 4 : 5
+Enter the element 5 : 
+3
+Enter the element 6 : 3
+Enter the element 7 : 6
+Enter the value of sum : 
+8
+Triplet is : 1 1 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Method-2 Using HashMaps*/
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Triplets{
+    private int[] arr;
+    
+    public void createArray(int n) {
+        Scanner sc = new Scanner(System.in);
+        arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the element " + (i + 1) + " : ");
+            arr[i] = sc.nextInt();
+        }
+    }
+    
+    public void triplet(int sum){
+        Map<Integer,Integer> mp = new HashMap<Integer,Integer>();
+        Set<List<Integer>> triplets =new HashSet<>();
+        
+        for(int i=0;i<arr.length;i++){
+            mp.put(arr[i],i);
+        }
+        for(int i=0;i<arr.length-2;i++){
+            int rem_sum = sum-arr[i];
+            for(int j=i+1;j<arr.length-1;j++){
+                int cur_sum = rem_sum-arr[j];
+                if(mp.containsKey(cur_sum) && mp.get(cur_sum)!=i && mp.get(cur_sum)!=j){
+                    Integer[] trp = {arr[i],arr[j],cur_sum};
+                    for(int k=0;k<2;k++){
+                        for(int l=(k+1);l<3;l++){
+                            if (trp[k]>trp[l]){
+                                int temp=trp[k];
+                                trp[k] = trp[l];
+                                trp[l] = temp;
+                            }
+                        }
+            
+                    }
+                    
+                    List<Integer> triplet = Arrays.asList(trp);
+                    
+                    // List<Integer> triplet = Arrays.asList(arr[i],arr[j],cur_sum);
+                    // triplet.sort(Comparator.naturalOrder());
+                    triplets.add(triplet);
+                    // System.out.println(arr[i]+" "+arr[j]+" "+cur_sum);
+                    
+                }
+            }
+        }
+        for(List<Integer> trip : triplets){
+            System.out.println("The triplet is : "+trip.get(0)+trip.get(1)+trip.get(2));
+        }
+    }
+    
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the value of n ");
+        int n = sc.nextInt();
+        Triplets obj = new Triplets();
+        obj.createArray(n);
+
+        System.out.println("Enter the value of sum : ");
+        int sum = sc.nextInt();
+        obj.triplet(sum);
+    }
+}
+
+OUTPUT : 
+
+java -cp /tmp/XFWEOOcthH Triplets
+Enter the value of n 
+7
+Enter the element 1 : 
+1
+Enter the element 2 : 
+2
+Enter the element 3 : 
+3
+Enter the element 4 : 
+4
+Enter the element 5 : 
+5
+Enter the element 6 : 
+6
+Enter the element 7 : 7
+Enter the value of sum : 
+8
+The triplet is : 134
+The triplet is : 125
